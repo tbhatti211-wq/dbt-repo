@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: load_data
+    description: 'Load data from s3 to our bronze layer'
+  
+
+  - name: golden
+    description: 'this layer will host the view for business analysis'
+
+
+sources:
+  - name: source1
+    database: DEA_REAL_TIME_SCD2
+    schema: RAW
+    tables:
+      - name: WORK_PRODUCT_COPY
+
+  - name: xfm
+    database: MINIPROJ3
+    schema: SILVER
+    tables:
+      - name: WORK_PRODUCT_TRANSFORM

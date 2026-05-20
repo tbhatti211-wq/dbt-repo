@@ -1,0 +1,39 @@
+
+version : 2
+
+models:
+    #model1
+  - name: employee
+    description: "employee model"
+    #MODEL2
+  - name: employee_full_salary
+    description: "Adding Annual Salary"
+    #model3
+  - name: sales
+    description: 'Sales SRC data'
+    #create view for employee anme and address
+  - name: ref_model
+    description: "Just to see dependendancy"
+
+
+sources:
+  - name: employee
+    database: DBT_DATABASE
+    schema: TEST_SCHEMA
+    tables:
+      - name: EMPLOYEE_RAW
+        config: 
+          freshness: null
+      - name: SALES_SRC
+        config: 
+          freshness:
+            warn_after:
+              count: 8
+              period: hour
+            error_after:
+              count: 1
+              period: day
+          loaded_at_field: CREATED_AT
+
+
+    

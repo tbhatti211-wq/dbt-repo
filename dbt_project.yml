@@ -9,6 +9,18 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 
+vars:
+
+   wrk_schema: RAW
+
+   file_format: DEA_REAL_TIME_SCD2.RAW.MY_CSV_FORMAT
+
+   purge_status: FALSE
+
+   stage_name: DEA_REAL_TIME_SCD2.RAW.DEA_REAL_TIME_SCD2_STAGE
+
+   rawhist_db: DEA_REAL_TIME_SCD2
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -38,5 +50,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   my_new_project:
     # Applies to all files under models/example/
-    example:
+    prac-model:
       +materialized: table
+    bronze:
+      +materialized: table
+    silver_layer:
+      +materialized: table
+    gold:
+      +materialized: view
+
